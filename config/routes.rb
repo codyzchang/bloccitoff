@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   get 'welcome/index'
-  get 'welcome/about'
-  get 'welcome/items'
+  
+  get 'about' => 'welcome#about'
+  get 'items' => 'welcome#items'
 
   devise_for :users
-  resources :users, only: [:update, :show, :index] do
-    resources :items, only: [:create], controller: 'items'
-  end
+  resources :users, only: [:update, :show, :index]
+    resources :items, only: [:create]
+  
 
   root "welcome#index"
 
