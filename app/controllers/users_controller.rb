@@ -6,11 +6,7 @@ class UsersController < ApplicationController
     @users = User.all
   end
   
-  def new
-    @item = Item.new
-    authorize @item
-  end
-  
+
   def show
     @user = User.find(params[:id])
     @items = @user.items.visible_to(current_user)
