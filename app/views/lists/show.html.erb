@@ -1,0 +1,28 @@
+<h1><%= @list.name %></h1>
+ 
+ <% if policy(@list).update? %>
+   <%= link_to "Edit List", edit_list_path, class: 'btn btn-success' %>
+ <% end %>
+ 
+ <div class="row">
+   <div class="col-md-8">
+     <p class="lead"><%= @list.description %></p>
+     <% @items.each do |item| %>
+       <div class="media">
+         <div class="media-body">
+           <h4 class="media-heading">
+             <%= link_to item.title, [@list, item] %>
+           </h4>
+              <small>
+                submitted <%= time_ago_in_words(item.created_at) %> ago by <%= item.user.name %><br>
+              </small>
+         </div>
+       </div>
+     <% end %>
+   </div>
+   <div class="col-md-4">
+     <% if policy(Item.new).create? %>
+       <%= link_to "New Item", new_list_item_path(@list), class: 'btn btn-success' %>
+     <% end %>
+   </div>
+ </div>
